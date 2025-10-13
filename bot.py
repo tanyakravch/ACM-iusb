@@ -109,7 +109,7 @@ async def _handle_dm_questionnaire(interaction: discord.Interaction, user: disco
         try:
             logger.info("Attempting to send DM to user %s (%s)", user, user.id)
             dm = await user.send(
-                "Hey there! Let's do this week's ACM question challenge 🎉\n\n Please reply to this DM with your answer. This is your only chance to submit. \n\n What is a computer?"
+                "Hey there! Let's do this week's ACM question challenge 🎉\n\n Please reply to this DM with your answer. This is your only chance to submit. \n\n Write a program in any language that intentionally generates a specific error — but in the most creative or non-obvious way possible. \n\n "StackOverflowError"."
             )
             logger.info("DM sent to user %s", user.id)
         except discord.Forbidden:
