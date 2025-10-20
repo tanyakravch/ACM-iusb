@@ -113,10 +113,7 @@ async def _handle_dm_questionnaire(interaction: discord.Interaction, user: disco
 
 Please reply to this DM with your answer. This is your only chance to submit.
 
-Write a program in any language that intentionally generates a specific error — 
-but in the most creative or non-obvious way possible.
-
-"StackOverflowError".
+What is the output of ord('a') - ord('A') in Python?
 """
 
             )
