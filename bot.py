@@ -24,14 +24,36 @@ submissions = {}
 # Track users currently being prompted (to avoid duplicate waits)
 pending_submissions = set()
 
+# at top of file, if not already present
+import asyncio
+from aiohttp import web
 
+# a tiny HTTP handler
+async def handle_root(request):
+    return web.Response(text="OK")
+
+# start an aiohttp server on 0.0.0.0:8080
+async def start_health_server():
+    app_web = web.Application()
+    app_web.add_routes([web.get('/', handle_root)])
+    runner = web.AppRunner(app_web)
+    await runner.setup()
+    site = web.TCPSite(runner, '0.0.0.0', 8080)
+    await site.start()
+    print("✅ Health server started on 0.0.0.0:8080")
+
+# schedule it when bot is ready
 @bot.event
 async def on_ready():
     logger.info("✅ Logged in as %s", bot.user)
+
+    # start the tiny webserver in the running event loop (so Fly health check passes)
+    bot.loop.create_task(start_health_server())
+
     try:
         synced = await bot.tree.sync()
         logger.info("🔧 Synced %d slash commands", len(synced))
-    except Exception as e:
+    except Exception:
         logger.exception("❌ Error syncing commands")
 
 
