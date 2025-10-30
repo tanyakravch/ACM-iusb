@@ -113,7 +113,7 @@ async def _handle_dm_questionnaire(interaction: discord.Interaction, user: disco
 
 Please reply to this DM with your answer. This is your only chance to submit.
 
-What is the output of ord('a') - ord('A') in Python?
+Which is more dangerous: humans with AI, or AI without humans?
 """
 
             )
